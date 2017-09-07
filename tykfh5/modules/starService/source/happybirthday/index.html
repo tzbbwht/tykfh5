@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title></title>
+    <style type="text/css">
+        img {
+            width: 100%;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            font-family: "microsoft yahei";
+        }
+
+        /*生日动画  2016.12.13 蓝罗智*/
+
+        .birthmainbg {
+            background: url("images/birthbg.jpg") no-repeat;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            -webkit-transform: translate3d(0, 0, 0);
+            -moz-transform: translate3d(0, 0, 0);
+            -ms-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            z-index: 111;
+        }
+
+        .birthmove1 {
+            width: 26%;
+            position: absolute;
+            z-index: 1;
+            left: 9%;
+            top: 9%;
+            animation: birthmymove 10s linear;
+            opacity: 0;
+        }
+
+        .birthmove2 {
+            width: 26%;
+            position: absolute;
+            left: 27%;
+            top: 31%;
+            animation: birthmymove2 10s linear;
+            opacity: 0;
+            z-index: 3;
+        }
+
+        .birthmove3 {
+            position: absolute;
+            z-index: 3;
+            width: 150%;
+            animation: birthmymove3 6s 4s linear;
+            opacity: 0;
+        }
+
+        .birthmove4 {
+            position: absolute;
+            width: 90%;
+            left: 5%;
+            top: 10%;
+            animation: birthmymove4 16s linear;
+            opacity: 1;
+        }
+
+        .birthmove1,
+        .birthmove2,
+        .birthmove3,
+        .birthmove4,
+        .detailsBtn {
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            -ms-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-perspective: 1000;
+            -moz-perspective: 1000;
+            -ms-perspective: 1000;
+            perspective: 1000;
+        }
+
+        @keyframes birthmymove {
+            0% {
+                left: -33%;
+                top: -32%;
+                opacity: 1;
+            }
+            30% {
+                left: 9%;
+                top: 9%;
+                opacity: 1;
+            }
+            50% {
+                left: 9%;
+                top: 9%;
+                opacity: 1;
+            }
+            51% {
+                left: 9%;
+                top: 9%;
+                opacity: 1;
+            }
+            67% {
+                left: 9%;
+                top: 9%;
+                opacity: 1;
+            }
+            100% {
+                left: 9%;
+                top: 9%;
+                opacity: 0;
+            }
+        }
+
+        @-webkit-keyframes birthmymove
+            /*Safari and Chrome*/
+
+        {
+            0% {
+                left: -33%;
+                top: -32%;
+                opacity: 1;
+            }
+            30% {
+                left: 9%;
+                top: 9%;
+                opacity: 1;
+            }
+            50% {
+                left: 9%;
+                top: 9%;
+                opacity: 1;
+            }
+            51% {
+                left: 9%;
+                top: 9%;
+                opacity: 1;
+            }
+            67% {
+                left: 9%;
+                top: 9%;
+                opacity: 1;
+            }
+            100% {
+                left: 9%;
+                top: 9%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes birthmymove2 {
+            0% {
+                left: 57%;
+                top: 82%;
+                opacity: 1;
+            }
+            30% {
+                left: 27%;
+                top: 31%;
+                opacity: 1;
+            }
+            50% {
+                left: 27%;
+                top: 31%;
+                opacity: 1;
+            }
+            51% {
+                left: 27%;
+                top: 31%;
+                opacity: 1;
+            }
+            67% {
+                left: 27%;
+                top: 31%;
+                opacity: 1;
+            }
+            100% {
+                left: 27%;
+                top: 31%;
+                opacity: 0;
+            }
+        }
+
+        @-webkit-keyframes birthmymove2
+            /*Safari and Chrome*/
+
+        {
+            0% {
+                left: 57%;
+                top: 82%;
+                opacity: 1;
+            }
+            30% {
+                left: 27%;
+                top: 31%;
+                opacity: 1;
+            }
+            50% {
+                left: 27%;
+                top: 31%;
+                opacity: 1;
+            }
+            51% {
+                left: 27%;
+                top: 31%;
+                opacity: 1;
+            }
+            67% {
+                left: 27%;
+                top: 31%;
+                opacity: 1;
+            }
+            100% {
+                left: 27%;
+                top: 31%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes birthmymove3 {
+            0% {
+                width: 10%;
+                left: 26%;
+                top: 35%;
+                opacity: 0.8;
+            }
+            100% {
+                width: 150%;
+                left: -25%;
+                top: 10%;
+                opacity: 0;
+            }
+        }
+
+        @-webkit-keyframes birthmymove3
+            /*Safari and Chrome*/
+
+        {
+            0% {
+                width: 10%;
+                left: 26%;
+                top: 35%;
+                opacity: 0.8;
+            }
+            100% {
+                width: 150%;
+                left: -25%;
+                top: 10%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes birthmymove4 {
+            0% {
+                opacity: 0;
+                width: 0;
+            }
+            63% {
+                width: 0;
+                left: 50%;
+                top: 50%;
+                opacity: 0;
+            }
+            80% {
+                width: 90%;
+                left: 5%;
+                top: 10%;
+                opacity: 1;
+            }
+            100% {
+                width: 90%;
+                left: 5%;
+                top: 10%;
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes birthmymove4
+            /*Safari and Chrome*/
+
+        {
+            0% {
+                opacity: 0;
+                width: 0;
+            }
+            63% {
+                width: 0;
+                left: 50%;
+                top: 50%;
+                opacity: 0;
+            }
+            80% {
+                width: 90%;
+                left: 5%;
+                top: 10%;
+                opacity: 1;
+            }
+            100% {
+                width: 90%;
+                left: 5%;
+                top: 10%;
+                opacity: 1;
+            }
+        }
+
+        .guanbi {
+            width: 10%;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 200;
+        }
+
+        /*add 8-28*/
+        .detailsBtn {
+            position: absolute;
+            top: 21.11111rem;
+            right: 18%;
+            font-size: 1rem;
+            color: #6185B5;
+            opacity: 0;
+            animation: .2s 13s birBtn;
+            -webkit-animation: .2s 13s birBtn;
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;
+            display: none;
+            z-index: 10;
+            font-weight: bold;
+        }
+
+
+
+        @keyframes birBtn {
+            0% {
+                opacity: 0;
+
+            }
+
+            100% {
+
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes birBtn {
+            0% {
+                opacity: 0;
+
+            }
+
+            100% {
+
+                opacity: 1;
+            }
+        }
+
+        .none { display: none;}
+
+
+    </style>
+</head>
+
+<body>
+<div class="birthmainbg">
+    <!--<div class="guanbi"><img src="images/guanbi.png" /></div>-->
+    <div class="guanbi none"><img src="images/guanbi.png" /></div>
+    <div class="birthmove1"><img src="images/boy.png"></div>
+    <div class="birthmove2"><img src="images/girl.png"></div>
+    <div class="birthmove3"><img src="images/love.png"></div>
+    <div class="birthmove4"><img src="images/xin.png"></div>
+    <div class="detailsBtn">
+        领取生日礼物 &gt;
+    </div>
+
+</div>
+</body>
+<script src="../../../../js/jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="../../../../js/plugin/HGPlugins.js?v=20160823"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="../../../../js/util.js?v=2016060102"></script>
+<script type="text/javascript">
+//    setTimeout(function () {
+//        var close = parent.window.document.getElementById('iframedh');
+//        $(close).hide();
+//    }, 16000);
+
+//    var close = parent.window.document.getElementById('iframedh');
+//    setTimeout(function () {
+//        $(".guanbi").fadeIn(200);
+//    },13000);
+//
+//    $(".guanbi").click(function () {
+//        $(close).fadeOut(200);
+//    });
+
+</script>
+
+</html>

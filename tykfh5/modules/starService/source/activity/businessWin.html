@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <title>业务弹窗提醒</title>
+    <link type="text/css" href="css/businessWin.css" rel="stylesheet"/>
+    <script type="text/javascript" src="../../../../js/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="../../../../js/util.js"></script>
+    <script type="text/javascript" src="../../../../js/plugin/HGPlugins.js"></script>
+</head>
+<body>
+    <div class="window">
+        <div class="animation">
+            <div class="closeBtn"></div>
+            <div class="content textMsg">
+                <div class="text">
+                    <p></p>
+                </div>
+                <div class="btn">流量查询</div>
+            </div>
+            <div class="content performMsg">
+                <p></p>
+            </div>
+        </div>
+    </div>
+<script>
+    function closeWin(e){
+        //关闭按钮事件
+        var close = parent.window.document.getElementById('iframznq');
+//        if(close != null) {
+            $(close).hide();
+//        }
+//        $('.animation').addClass('animationOutUp').parents('.window').fadeOut(1000);
+    }
+    $(document).ready(function () {
+        var userInfo = $.parseJSON($.util.getParameter("ReqParam")),
+            activeParam = $.parseJSON($.util.getParameter("activeParam")),
+            //处理ios8能力打开页面不能用
+            str = navigator.userAgent.toLowerCase(),
+            iosSystem = str.match(/cpu iphone os (.*?) like mac os/);
+        $.util.postJump('124',activeParam.sceneId,'','业务弹窗提醒');
+        $('.animation .content p').html(activeParam.content);
+        $('.animation .content .btn').html(activeParam.buttonName);
+        //modelId A:有内容无按钮， B：有内容有按钮
+        if(activeParam.modelId == 'A'){
+            $('.animation .performMsg').show().find('p').html(activeParam.content);
+        }else if(activeParam.modelId == 'B'){
+            $('.animation .textMsg').show().find('p').html(activeParam.content);
+            $('.animation .textMsg .btn').html(activeParam.buttonName);
+        }
+
+        /**
+         * 跳转按钮
+         * */
+        $('.animation .content').on({
+            'click':function(){
+                var url = activeParam.jumpUrl.lastIndexOf('?') > -1?activeParam.jumpUrl:activeParam.jumpUrl+'?';
+                if(iosSystem && (iosSystem[1].replace(/_/g, ".")).indexOf('8') > -1){
+                    location.href = url+'ReqParam='+JSON.stringify(userInfo);
+                }else{
+                    HGPlugins.openTitleWebView(url+'ReqParam='+encodeURIComponent(JSON.stringify(userInfo)),'星级服务', 'happygo');
+                }
+            }
+        },'.btn');
+
+        //关闭按钮事件
+        var close = parent.window.document.getElementById('iframedh');
+        $('.closeBtn').click(function() {
+            $('.animation').addClass('animationOutUp');
+            setTimeout(function(){
+                $(close).hide();
+            },700);
+        });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="format-detection" content="telephone=no, email=no"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+	<title>推荐活动</title>
+	<link type="text/css" href="css/1.css" rel="stylesheet" />
+	<script type="text/javascript" src="../../../../js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="../../../../js/util.js"></script>
+	<script type="text/javascript" src="../../../../js/plugin/HGPlugins.js"></script>
+</head>
+<body>
+	<div class="container">
+		<img class="closeBtn" src="img/icon_closeBtn.png"/>
+		<div class="welcome">
+			<img src="img/gif1.png" class="one"/>
+			<img src="img/gif2.png" class="two"/>
+			<img src="img/gif3.png" class="three"/>
+			<img src="img/gif4.png" class="four"/>
+			<img src="img/gif5.png" class="five"/>
+			<img src="img/gif6.png" class="six"/>
+			<img src="img/gif6.png" class="six"/>
+			<img src="img/gif7.png" class="seven"/>
+		</div>
+		<div class="aniu">
+			<p class="eight">
+				<img src="img/gif9.png" class="nine"/>
+				<img src="img/gif9.png" class="nine"/>
+				<img src="img/gif9.png" class="nine"/>
+				<img src="img/gif10.png" class="ten"/>
+				<img src="img/gif10.png" class="ten"/>
+				<img src="img/gif10.png" class="ten"/>
+			</p>
+		</div>
+	</div>
+<script>
+	$(document).ready(function () {
+		var userInfo = $.parseJSON($.util.getParameter("ReqParam")),
+			reqParam = '',
+			//处理ios8能力打开页面不能用
+			str = navigator.userAgent.toLowerCase(),
+			iosSystem = str.match(/cpu iphone os (.*?) like mac os/);
+		$('.container .closeBtn').fadeIn(3000);
+		$.util.postJump('123', userInfo.activityId, '', '推介活动');
+		if (userInfo && parseInt(userInfo.jumpType) == 1) {
+			reqParam = userInfo;
+		} else if (userInfo && parseInt(userInfo.jumpType) == 2) {
+			reqParam = {
+				"activityId": userInfo.activityId,
+				"token": userInfo.token,
+				"channel": userInfo.channel,
+				"userLevel": userInfo.userLevel,
+				"deviceType": "2000004",
+				"loginSrc": "0",
+				"activityUrl": userInfo.activityUrl
+			};
+		}
+
+		/**
+		 * 领取按钮
+		 * */
+		$('.container').on({
+			'click': function () {
+				var url = userInfo.activityUrl.indexOf('?') > -1 ? userInfo.activityUrl : userInfo.activityUrl + '?';
+				if(iosSystem && (iosSystem[1].replace(/_/g, ".")).indexOf('8') > -1){
+					location.href = url+'ReqParam='+JSON.stringify(reqParam);
+				}else{
+					HGPlugins.openTitleWebView(url+'ReqParam='+encodeURIComponent(JSON.stringify(reqParam)), '星级服务', 'happygo');
+				}
+			}
+		}, '.aniu .eight');
+
+		//关闭按钮事件
+		var close = parent.window.document.getElementById('iframedh');
+		$('.closeBtn').click(function() {
+			$(close).hide();
+		});
+	})
+</script>
+</body>
+</html>
