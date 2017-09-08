@@ -10,7 +10,7 @@ $(function(){
         hWidth = html.getBoundingClientRect().width;
     html.style.fontSize = hWidth / 24 + 'px';
 
-    //用户 1-4星级 399M   5-7 999M
+    //广西用户 1-4星级 399M   5-7 999M
         if ( userInfo.userLevel >= '11' && userInfo.userLevel <= '14' ) {
             $(".traffic").html("399M");
        }else if( userInfo.userLevel >= '15' && userInfo.userLevel <= '17' ){
