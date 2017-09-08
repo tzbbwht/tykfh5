@@ -381,7 +381,7 @@ $(document).ready(function() {
                             locationhref = item.activityDtlUrl + '?channel=' + userInfo.channel;
                         }
                         tpl.push('<div class="clic1 swiper-slide" id="Activity' + i + '">' +
-                            '<img src="' + item.activityImgURL + '" class="imgclass1" />' +
+                            '<img src="' + item.activityImgURL + '?v=1" class="imgclass1" />' +
                             '</div>');
 
                         $(document).on("click", '#Activity' + i, function() {
@@ -491,7 +491,7 @@ $(document).ready(function() {
                     var tpl = [];
                     $.each(data.activityList, function(i, item) {
                         tpl.push('<div class="clic1 swiper-slide gran">' +
-                            '<img src="' + item.activityImgURL + '" class="imgclass1" />' +
+                            '<img src="' + item.activityImgURL + '?v=1" class="imgclass1" />' +
                             '</div>');
                     });
                     $('.center').html(tpl.join(''));
@@ -801,7 +801,7 @@ $(document).ready(function() {
                             return false;
                         }
                         tpl.push('<div class="swiper-slide hbslide" id="detail' + i + '">' +
-                            '<img src="' + item.pricture + '" class="imgclass2" />' +
+                            '<img src="' + item.pricture + '?v=1" class="imgclass2" />' +
                             '<div class="hbhdtext">' + item.summary + '</div>' +
                             '</div>');
                         //点击图片跳活动详情
@@ -918,7 +918,7 @@ $(document).ready(function() {
                         }
                         tpl.push('<div class="swiper-slide zkslide" id="zktz' + i + '"><div class="zkzqon">' +
                             '<div class="zkzqtext">' + item.title + '</div>' +
-                            '<img src="' + item.picture + '" class="zk" />' +
+                            '<img src="' + item.picture + '?v=1" class="zk" />' +
                             '</div></div>');
                         //绑定banner轮播点击
                         $("body").delegate('#zktz' + i, 'click', function() {
@@ -1029,7 +1029,7 @@ $(document).ready(function() {
                 if(data.resCode == '200' && data.nativeList.length > 0) {
                     var tpl = [];
                     $.each(data.nativeList, function(i, item) {
-                        tpl.push('<div class="clic2" id="bd' + i + '"><img src="' + item.picture + '" class="imgclass3" /></div>');
+                        tpl.push('<div class="clic2" id="bd' + i + '"><img src="' + item.picture + '?v=1" class="imgclass3" /></div>');
                         //绑定banner轮播点击
                         $("body").delegate('#bd' + i, 'click', function() {
                             userInfo.productNbr = item.productNbr;

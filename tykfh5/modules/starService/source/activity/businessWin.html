@@ -26,14 +26,7 @@
         </div>
     </div>
 <script>
-    function closeWin(e){
-        //关闭按钮事件
-        var close = parent.window.document.getElementById('iframznq');
-//        if(close != null) {
-            $(close).hide();
-//        }
-//        $('.animation').addClass('animationOutUp').parents('.window').fadeOut(1000);
-    }
+
     $(document).ready(function () {
         var userInfo = $.parseJSON($.util.getParameter("ReqParam")),
             activeParam = $.parseJSON($.util.getParameter("activeParam")),
