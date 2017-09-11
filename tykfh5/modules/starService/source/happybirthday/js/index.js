@@ -19,18 +19,23 @@ $(function () {
         $(".detailsBtn").show();
         cBtn();
         $(".detailsBtn").click(function () {
+
             //入库
             $.util.postJump('122', '', '', '生日详情页');
             var aUrl = jumpUrl.indexOf("?") > -1 ? jumpUrl : jumpUrl + "?";
             //jumpType跳转类型  0 跳“广西”h5页面    1 且是 5-7星级 跳转"重庆"
-            if ( jumpType == '0' && userInfo.province == '广西') {
+            if ( jumpType == '0') {
+
                 if(ver && (ver[1].replace(/_/g, ".")).indexOf('8') > -1) {
                     location.href = aUrl +'&ReqParam=' + JSON.stringify(userInfo);
+                    var a = $(window).height();
+                    $(".container").height(a);
+                    alert(a);
                 } else {
                   HGPlugins.openTitleWebView( aUrl + '&ReqParam=' + encodeURIComponent(JSON.stringify(userInfo)), '星级服务', 'happygo');
                 }
-                // location.href = "../../source/birthremind/index.html?&ReqParam=" +JSON.stringify(userInfo);
-            } else if ( jumpType == '1' && userInfo.province == '重庆' && userInfo.userLevel >= '15' && userInfo.userLevel <= '17') {
+               // location.href = "../../source/birthremind/index.html?&ReqParam=" +JSON.stringify(userInfo);
+            } else if ( jumpType == '1' && userInfo.userLevel >= '15' && userInfo.userLevel <= '17') {
                    if(ver && (ver[1].replace(/_/g, ".")).indexOf('8') > -1) {
                         location.href =  aUrl + "&activityId=" + activityId + "&token=" +
                         userInfo.token + "&channel=" + userInfo.channel + "&userLevel=" + userInfo.userLevel

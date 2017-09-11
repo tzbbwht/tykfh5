@@ -9,6 +9,8 @@ $(function(){
     var html = document.documentElement,
         hWidth = html.getBoundingClientRect().width;
     html.style.fontSize = hWidth / 24 + 'px';
+    var a = $(window).height();
+    $(".container").height(a);
 
     //广西用户 1-4星级 399M   5-7 999M
         if ( userInfo.userLevel >= '11' && userInfo.userLevel <= '14' ) {
@@ -18,7 +20,8 @@ $(function(){
        }
         $(".queryBtn").click(function(){
             if(ver && (ver[1].replace(/_/g, ".")).indexOf('8') > -1) {
-               location.href = '../../../businessHandling/queryFlow/index.html?ReqParam=' + JSON.stringify(userInfo);
+              location.href = '../../../businessHandling/queryFlow/index.html?ReqParam=' + JSON.stringify(userInfo);
+
             } else {
                HGPlugins.openTitleWebView( ip + 'tykfh5/modules/businessHandling/queryFlow/index.html?ReqParam=' + encodeURIComponent(JSON.stringify(userInfo)), '星级服务', 'happygo');
             }

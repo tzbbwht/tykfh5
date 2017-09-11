@@ -1130,7 +1130,7 @@ $(document).ready(function() {
                 // response =
 					// {
 					// 	"resCode":"200","resDesc":"SUCCESS","status":"0","type":"1",
-					// 	"isInteractive":"1","jumpType":"0",
+					// 	"isInteractive":"0","jumpType":"0",
 					// 	"jumpUrl":"https://www.baidu.com/",
 					// 	"configInfo":{"fullViewAddr":"/res/upload/zdfw/quanshituyuandan201612271523257.jpg","medalWallAddr":"/res/upload/zdfw/xuzhuangqiangyuandan201612271414256.jpg","rightsExplain":"/res/upload/zdfw/quanyijieshiyuandan201612271638259.jpg","exerciseAddr":"/res/upload/zdfw/xingquanyuandan201612271034258.jpg"}
                 //    }
@@ -1138,8 +1138,17 @@ $(document).ready(function() {
                 	var flag = false;
     			//动画展示状态status（0-未展示 1-已展示）   节假日类型type 1-生日
                     if (response.status == '0' && response.type =='1') {
-                        $('#iframedh').show().attr("src", "../source/happybirthday/index.html?ReqParam=" + JSON.stringify(userInfo)
+                        $('#iframedh').attr("src", "../source/happybirthday/index.html?ReqParam=" + JSON.stringify(userInfo)
                             + '&isInteractive=' + response.isInteractive + '&jumpType=' + response.jumpType+ '&jumpUrl=' + response.jumpUrl+ '&activityId=' + response.activityId);
+                        $('#iframedh').show();
+
+                        // if(ver && (ver[1].replace(/_/g, ".")).indexOf('8') > -1) {
+                        //
+                        //     location.href = "../source/happybirthday/index.html?ReqParam=" + JSON.stringify(userInfo) + '&isInteractive=' + response.isInteractive + '&jumpType=' + response.jumpType+ '&jumpUrl=' + response.jumpUrl+ '&activityId=' + response.activityId;
+                        // }
+                        // else {
+                        //     HGPlugins.openTitleWebView( ip + 'tykfh5/modules/starService/source/happybirthday/index.html?&ReqParam=' + encodeURIComponent(JSON.stringify(userInfo))+ '&isInteractive=' + response.isInteractive + '&jumpType=' + response.jumpType+ '&jumpUrl=' + response.jumpUrl+ '&activityId=' + response.activityId, '星级服务', 'happygo');
+                        // }
                         flag = true;
     			}
 
@@ -1190,7 +1199,7 @@ $(document).ready(function() {
                         flag = true;
                     }
                     if(response.type == '1' || response.type == '2' || response.type == '3' || response.type == '4' || response.type == '5' || response.type == '6') {
-                        $('.bg_andy').attr('src', response.configInfo.medalWallAddr);
+                        $('.floorbg').attr('src', response.configInfo.medalWallAddr);
                           //缓存全视图背景
                         if(response.configInfo.fullViewAddr != null && response.configInfo.fullViewAddr != undefined || response.configInfo.fullViewAddr != "") {
                             localStorage.setItem(userInfo.province + 'qstBackImg', JSON.stringify(response.configInfo.fullViewAddr));
@@ -1224,22 +1233,16 @@ $(document).ready(function() {
      * 升星
      * */
     function starUp(){
-        var transactionId = '2000010001' + timestamp + parseInt(Math.random() * 1000000),
-            reqParam = {
-                "transactionId": transactionId,
-                "channelCode": 'H5002018',
-                "token": userInfo.token,
-                "type": 1
-            },
-        starup = {"transactionId": transactionId ,"channelCode":"H5002018","mobile":userInfo.mobile ,"columnSource":"1","token":userInfo.token};
+        var starup = {"channelCode":"H5002018","mobile":userInfo.mobile ,"columnSource":"1","token":userInfo.token};
         $.ajax({
             type: 'GET',
             dataType: "JSON",
             timeout: AjaxTimeout,
             url: encodingRedirectUrlForClientUni('/clientuni/services/starLevel/risingStarEffect?reqParam=' + JSON.stringify(starup)),
             success: function (response) {
-                // response={"resCode":"200","resDesc":"SUCCESS","status":"1"};
+               // response={"resCode":"200","resDesc":"SUCCESS","status":"1"};
                 if (response.resCode == '200' && response.status == '1') {
+                    $.util.postJump('124', '50', '', '升星页面');
                     $(".sxnum").html(starLv(userInfo.userLevel));
                     $(".sxbox").slideDown(2000);
                     setTimeout(function() {
@@ -1255,8 +1258,7 @@ $(document).ready(function() {
      * 推介活动/一周年账单
      * */
     function recommendActivity(){
-        var transactionId = '2000010002'+$.util.dateTime()+$.util.randomNum(6),
-            reqParam = {"transactionId":transactionId,"token":userInfo.token,"channel":userInfo.channel,
+        var reqParam = {"token":userInfo.token,"channel":userInfo.channel,
                 "channelCode":"H5002018","userLevel":userInfo.userLevel,"mobile":userInfo.mobile,"columnSource":"1"
             };
         $.ajax({
@@ -1286,7 +1288,7 @@ $(document).ready(function() {
                         selector = "#iframedh";
                         url = activityUrlList.url+repText.effectType+'.html?'
                     }
-                    $('body iframe'+selector).show().attr('src',url+reqParam);
+                    $('body iframe'+selector).attr('src',url+reqParam).show();
                 }else{
                     businessWin();
                 }
@@ -1301,8 +1303,7 @@ $(document).ready(function() {
      * 业务弹窗提醒 文字/文字+按钮
      * */
     function businessWin(){
-        var transactionId = '2000010003'+$.util.dateTime()+$.util.randomNum(6),
-            reqParam = {"transactionId":transactionId,"token":userInfo.token,"channelCode":"H5002018",
+        var reqParam = {"token":userInfo.token,"channelCode":"H5002018",
                 "mobile":userInfo.mobile,"columnSource":"1"
             };
         $.ajax({
@@ -1323,7 +1324,7 @@ $(document).ready(function() {
                             "sceneId":repText.sceneId,"modelId":repText.modelId,"content":repText.content,
                             "jumpUrl":repText.jumpUrl,"buttonName":repText.buttonName
                         };
-                    $('body iframe#iframedh').show().attr('src',url+'ReqParam='+JSON.stringify(userInfo)+'&activeParam='+JSON.stringify(activeParam));
+                    $('body iframe#iframedh').attr('src',url+'ReqParam='+JSON.stringify(userInfo)+'&activeParam='+JSON.stringify(activeParam)).show();
                 }
             }
             ,error:function(){}
